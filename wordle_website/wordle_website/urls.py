@@ -19,9 +19,10 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.homepage),
-    path('home/', views.homepage),
-    path('about/', views.about),
-    path('posts/', include('posts.urls')),
+    path("admin/", admin.site.urls),
+    path("", views.homepage),
+    path("home/", views.homepage),
+    path("about/", views.about),
+    path("words/", views.get_words),
+    path("get_random/", views.get_random),
 ]

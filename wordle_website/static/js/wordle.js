@@ -1,14 +1,16 @@
-const deepcopy = require('deepcopy');
-const contents = require('./contents');
-const getRandomWord = require('./get_random_word');
-const words = require('./words');
+import { words } from './contents.js';
+import { bestWords, averageLetterPosition } from './words.js';
 
 let word = "";
 let i = 0;
 
+function getRandom() {
+    return words[Math.floor(Math.random() * words.length)];
+}
+
 function startGame() {
     i = 0;
-    word = getRandomWord.getRandom();
+    word = getRandom();
     // word="קלזיו"
     // console.log(word);
 }
@@ -16,7 +18,7 @@ function startGame() {
 function gameLoop(wordGuess) {
     while (i < 6) {
         const wordTry = wordGuess;
-        if (wordTry.length !== 5 || !contents.contents.includes(wordTry)) {
+        if (wordTry.length !== 5 || !words.includes(wordTry)) {
             console.log("please enter a real 5 letter word: ", wordTry);
             continue;
         }
@@ -145,7 +147,7 @@ function guesser() {
             console.log(guessResults);
         }
 
-        const dictionary = contents.words;
+        const dictionary = words;
         if (guessResults.every(val => val === 1)) {
             return true;
         }
@@ -168,10 +170,10 @@ function guesser() {
         if (greenLetters.length > 0 || yellowLetters.length > 0 || wrongLetters.length > 0) {
             wordGuess = listMatches(greenLetters, dictionary, yellowLetters, wrongLetters, guessResults, i);
         } else {
-            wordGuess = getRandomWord.getRandom();
+            wordGuess = getRandom();
         }
         if (!wordGuess) {
-            wordGuess = getRandomWord.getRandom();
+            wordGuess = getRandom();
         }
     }
 
@@ -179,13 +181,13 @@ function guesser() {
     return false;
 }
 
-if (require.main === module) {
-    let correct = 0;
-    for (let i = 0; i < 100; i++) {
-        if (guesser()) {
-            correct += 1;
-        }
-        console.log("=========================================");
-    }
-    console.log(correct / 100);
-}
+// if (require.main === module) {
+//     let correct = 0;
+//     for (let i = 0; i < 100; i++) {
+//         if (guesser()) {
+//             correct += 1;
+//         }
+//         console.log("=========================================");
+//     }
+//     console.log(correct / 100);
+// }

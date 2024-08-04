@@ -1,8 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
+import { bestWords, averageLetterPosition } from './words.js';
+import { words } from './contents.js';
+
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+    function getRandom() {
+        return words[Math.floor(Math.random() * words.length)];
+    }
+    var word = getRandom();
+    
     const grid = document.querySelector('.grid');
     const keys = document.querySelectorAll('.key');
     let currentRow = 0;
     let currentCell = 0;
+    console.log("kys")
+
+    console.log(bestWords(words, averageLetterPosition));
 
     // Handle keypress events
     document.addEventListener('keydown', (e) => {
@@ -34,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (key === 'Enter') {
         // Handle enter key logic
         if (currentCell === 5) {
-            word = "סקסים"
             let cells=[]
             let isCorrect =true;
 
@@ -91,4 +103,4 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCell(row, cell) {
         return grid.children[row].children[4-cell];
     }
-});
+// });
