@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="he">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle Layout</title>
+    <title>Wordle Layout in Hebrew</title>
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
 
 
 </head>
-<body>
-    <div class="container">
+<div class="container">
         <div class="grid">
             <!-- Create 6 rows for the guesses, each with 5 cells -->
             <div class="row">
@@ -58,37 +57,39 @@
         </div>
         <div class="keyboard">
             <div class="keyboard-row">
-                <button class="key" data-key="Q">Q</button>
-                <button class="key" data-key="W">W</button>
-                <button class="key" data-key="E">E</button>
-                <button class="key" data-key="R">R</button>
-                <button class="key" data-key="T">T</button>
-                <button class="key" data-key="Y">Y</button>
-                <button class="key" data-key="U">U</button>
-                <button class="key" data-key="I">I</button>
-                <button class="key" data-key="O">O</button>
-                <button class="key" data-key="P">P</button>
+                <button class="key" data-key="ק">ק</button>
+                <button class="key" data-key="ר">ר</button>
+                <button class="key" data-key="א">א</button>
+                <button class="key" data-key="ט">ט</button>
+                <button class="key" data-key="ו">ו</button>
+                <button class="key" data-key="ן">ן</button>
+                <button class="key" data-key="ם">ם</button>
+                <button class="key" data-key="פ">פ</button>
             </div>
             <div class="keyboard-row">
-                <button class="key" data-key="A">A</button>
-                <button class="key" data-key="S">S</button>
-                <button class="key" data-key="D">D</button>
-                <button class="key" data-key="F">F</button>
-                <button class="key" data-key="G">G</button>
-                <button class="key" data-key="H">H</button>
-                <button class="key" data-key="J">J</button>
-                <button class="key" data-key="K">K</button>
-                <button class="key" data-key="L">L</button>
+                <button class="key" data-key="ש">ש</button>
+                <button class="key" data-key="ד">ד</button>
+                <button class="key" data-key="ג">ג</button>
+                <button class="key" data-key="כ">כ</button>
+                <button class="key" data-key="ע">ע</button>
+                <button class="key" data-key="י">י</button>
+                <button class="key" data-key="ח">ח</button>
+                <button class="key" data-key="ל">ל</button>
+                <button class="key" data-key="ך">ך</button>
+            </div>
+            <div class="keyboard-row">
+                <button class="key" data-key="ז">ז</button>
+                <button class="key" data-key="ס">ס</button>
+                <button class="key" data-key="ב">ב</button>
+                <button class="key" data-key="ה">ה</button>
+                <button class="key" data-key="נ">נ</button>
+                <button class="key" data-key="מ">מ</button>
+                <button class="key" data-key="צ">צ</button>
+                <button class="key" data-key="ת">ת</button>
+                <button class="key" data-key="ץ">ץ</button>
             </div>
             <div class="keyboard-row">
                 <button class="key special" data-key="Enter">Enter</button>
-                <button class="key" data-key="Z">Z</button>
-                <button class="key" data-key="X">X</button>
-                <button class="key" data-key="C">C</button>
-                <button class="key" data-key="V">V</button>
-                <button class="key" data-key="B">B</button>
-                <button class="key" data-key="N">N</button>
-                <button class="key" data-key="M">M</button>
                 <button class="key special" data-key="Backspace">Backspace</button>
             </div>
         </div>
