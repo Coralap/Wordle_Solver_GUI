@@ -62,10 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
 
-
             console.log(isCorrect);
             currentRow++;
             currentCell = 0;
+
+            console.log(cells)
 
         }
     } else if (key === 'Backspace') {
