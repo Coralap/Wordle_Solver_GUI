@@ -34,8 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (key === 'Enter') {
         // Handle enter key logic
         if (currentCell === 5) {
+            word = "סקסים"
+            let cells=[]
+            for(int i =1; i<=5; i++){
+                cell.append(getCell(currentRow),i)
+            }
+
             currentRow++;
             currentCell = 0;
+
         }
     } else if (key === 'Backspace') {
         // Handle backspace logic
