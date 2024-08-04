@@ -36,10 +36,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentCell === 5) {
             word = "סקסים"
             let cells=[]
-            for(int i =1; i<=5; i++){
-                cell.append(getCell(currentRow),i)
-            }
+            let isCorrect =true;
 
+            for(let i =0; i<5; i++){
+                cells.push(getCell(currentRow,i));
+            }
+             let letters_in_word = Array.from(word);
+             console.log(cells);
+             console.log(letters_in_word);
+
+            cells.forEach((element,index) =>{
+
+                if(letters_in_word.includes(element.textContent)){
+                element.classList.add("yellow_letter");
+                }
+            });
+            const result = cells.filter((word,index) => word.textContent ===letters_in_word[index]);
+            if(result.length!=5){
+            isCorrect=false;
+            }
+            result.forEach((element) =>{
+            element.classList.add("correct");
+            });
+
+
+
+            console.log(isCorrect);
             currentRow++;
             currentCell = 0;
 
