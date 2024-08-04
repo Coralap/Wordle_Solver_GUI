@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    word = "סקסים"
     const grid = document.querySelector('.grid');
     const keys = document.querySelectorAll('.key');
     let currentRow = 0;
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (key === 'Enter') {
         // Handle enter key logic
         if (currentCell === 5) {
-            word = "סקסים"
+
             let cells=[]
             let isCorrect =true;
 
@@ -42,27 +43,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 cells.push(getCell(currentRow,i));
             }
              let letters_in_word = Array.from(word);
-             console.log(cells);
-             console.log(letters_in_word);
+
+
+
+
+            const result = cells.filter((word,index) => word.textContent ===letters_in_word[index]);
 
             cells.forEach((element,index) =>{
-
+            //if there are more letters in the actual word then the answer given no more yellow boys
+                const num_letters_in_result = (result.filter(x => x.textContent===element.textContent)).length;
+                const num_letters_in_word = (letters_in_word.filter(x => x===element.textContent)).length;
+                const num_letters_in_cells= (cells.filter(x => x.textContent===element.textContent)).length;
+                const is_yellow = (num_letters_in_word>=num_letters_in_cells)
                 if(letters_in_word.includes(element.textContent)){
-                element.classList.add("yellow_letter");
-                }else{
-                element.classList.add("wrong_letter");
+                    element.classList.add("yellow_letter");
+                }else if(element.textContent!==letters_in_word[index]){
+                    element.classList.add("wrong_letter");
+                }
+                if(num_letters_in_word==num_letters_in_result){
+                    element.classList.remove("yellow_letter");
+                    element.classList.add("wrong_letter");
+
                 }
             });
-            const result = cells.filter((word,index) => word.textContent ===letters_in_word[index]);
+
+
             if(result.length!=5){
             isCorrect=false;
             }
             result.forEach((element) =>{
             element.classList.add("correct");
+             element.classList.remove("wrong_letter");
             });
 
 
-            console.log(isCorrect);
             currentRow++;
             currentCell = 0;
 
