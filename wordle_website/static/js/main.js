@@ -36,12 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentCell === 5) {
             word = "סקסים"
             let cells=[]
-            for(int i =1; i<=5; i++){
-                cell.append(getCell(currentRow),i)
+            for(let i = 0; i<5; i++){
+                cells.push(getCell(currentRow,i).textContent)
             }
+            
 
             currentRow++;
             currentCell = 0;
+
+            console.log(cells)
 
         }
     } else if (key === 'Backspace') {
