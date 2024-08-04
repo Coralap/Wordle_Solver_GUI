@@ -19,6 +19,13 @@ body {
     right:10%;
     margin-bottom:152px;
 }
+.key.wrong_letter {
+    background-color: #d9534f; /* Red for wrong letters */
+}
+
+.key.correct {
+    background-color: green; /* Green for correct letters */
+}
 
 .container {
     display: flex;
