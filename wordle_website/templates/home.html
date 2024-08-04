@@ -10,7 +10,8 @@
 
 </head>
 <body>
-<div class="container player_body">
+    <div class="warning" dir="rtl">דומני שהמילה אינה קיימת!</div>
+    <div class="container player_body">
         <div class="grid">
             <!-- Create 6 rows for the guesses, each with 5 cells -->
             <div class="row">
@@ -96,7 +97,7 @@
         </div>
         </div>
     </div>
-<div class="container bot_body">
+    <div class="container bot_body">
         <div class="grid">
             <!-- Create 6 rows for the guesses, each with 5 cells -->
             <div class="row">
@@ -143,9 +144,9 @@
             </div>
         </div>
     </div>
-          <script src="{% static 'js/main.js' %}" type="module"> </script>
-        <script src="{% static 'js/words.js' %}"type="module"></script>
-        <script src="{% static 'js/wordle.js' %}"type="module"></script>
-        <script src="{% static 'js/contents.js' %}"type="module"></script>
+    <script src="{% static 'js/main.js' %}" type="module"> </script>
+    <script src="{% static 'js/words.js' %}"type="module"></script>
+    <script src="{% static 'js/wordle.js' %}"type="module"></script>
+    <script src="{% static 'js/contents.js' %}"type="module"></script>
 </body>
 </html>
