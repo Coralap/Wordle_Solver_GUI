@@ -42,9 +42,20 @@ import { words } from './contents.js';
         } else {
             return e.key; // For Hebrew letters
         }
-    }
+    });
+});
 
-   function handleKeyPress(key) {
+function getKeyFromEvent(e) {
+    if (e.key === 'Enter') {
+        return 'Enter';
+    } else if (e.key === 'Backspace') {
+        return 'Backspace';
+    } else {
+        return e.key; // For Hebrew letters
+    }
+}
+
+function handleKeyPress(key) {
     if (key === 'Enter') {
         // Handle enter key logic
         if (currentCell === 5) {
@@ -74,31 +85,40 @@ import { words } from './contents.js';
                 const is_yellow = (num_letters_in_word>=num_letters_in_cells)
                 if(letters_in_word.includes(element.textContent)){
                     element.classList.add("yellow_letter");
-                }else if(element.textContent!==letters_in_word[index]){
+                } else if (element.textContent !== letters_in_word[index]) {
                     element.classList.add("wrong_letter");
                 }
-                if(num_letters_in_word==num_letters_in_result){
+                if (num_letters_in_word === num_letters_in_result) {
                     element.classList.remove("yellow_letter");
                     element.classList.add("wrong_letter");
+                }
 
+                // Update button colors
+                const button = keyMap[element.textContent];
+                if (button) {
+                    button.classList.add("wrong_letter");
                 }
             });
 
-
-            if(result.length!=5){
-            isCorrect=false;
+            if (result.length !== 5) {
+                isCorrect = false;
             }
-            result.forEach((element) =>{
-            element.classList.add("correct");
-             element.classList.remove("wrong_letter");
-            });
+            result.forEach((element) => {
+                element.classList.add("correct");
+                element.classList.remove("wrong_letter");
 
+                // Update button colors
+                const button = keyMap[element.textContent];
+                if (button) {
+                    button.classList.add("correct");
+                    button.classList.remove("wrong_letter");
+                }
+            });
 
             currentRow++;
             currentCell = 0;
 
             console.log(cells)
-
         }
     } else if (key === 'Backspace') {
         // Handle backspace logic
@@ -135,3 +155,4 @@ function fadeOut(el) {
         }
     }, 150);
 }
+
