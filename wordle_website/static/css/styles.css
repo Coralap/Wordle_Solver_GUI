@@ -51,6 +51,11 @@ body {
     color: white; /* Ensure the text is visible on the green background */
 }
 
+.cell.wrong_letter{
+    background-color: gray;
+    color: white; /*
+}
+
 .keyboard {
     display: flex;
     flex-direction: column;

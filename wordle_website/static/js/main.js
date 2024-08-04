@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if(letters_in_word.includes(element.textContent)){
                 element.classList.add("yellow_letter");
+                }else{
+                element.classList.add("wrong_letter");
                 }
             });
             const result = cells.filter((word,index) => word.textContent ===letters_in_word[index]);
