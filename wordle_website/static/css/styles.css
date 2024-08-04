@@ -41,6 +41,21 @@ body {
        direction: rtl; /* Ensure text is right-to-left */
 }
 
+
+.cell.yellow_letter {
+    background-color: #bfac2e;
+    color: white; /* Ensure the text is visible on the green background */
+}
+.cell.correct {
+    background-color: green;
+    color: white; /* Ensure the text is visible on the green background */
+}
+
+.cell.wrong_letter{
+    background-color: gray;
+    color: white; /*
+}
+
 .keyboard {
     display: flex;
     flex-direction: column;
