@@ -1,5 +1,4 @@
-import { getRandom } from './get_random_word';
-import { words } from './contents';
+import { words } from './contents.js';
 
 const commonLetters = ['ה', 'י', 'ו', 'ר', 'ל'];
 
@@ -133,3 +132,5 @@ function bestWords(wordList, averageLetterPosition) {
 }
 
 const averageLetterPosition = getMostCommonPosition();
+
+export { bestWords, averageLetterPosition };
