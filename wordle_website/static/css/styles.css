@@ -10,6 +10,16 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.player_body{
+       position: fixed;
+    left:10%;
+}
+.bot_body{
+       position: fixed;
+    right:10%;
+    margin-bottom:152px;
+}
+
 .container {
     display: flex;
     flex-direction: column;

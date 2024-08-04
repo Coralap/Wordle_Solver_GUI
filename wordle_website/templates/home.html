@@ -9,7 +9,8 @@
 
 
 </head>
-<div class="container">
+<body>
+<div class="container player_body">
         <div class="grid">
             <!-- Create 6 rows for the guesses, each with 5 cells -->
             <div class="row">
@@ -94,7 +95,55 @@
             </div>
         </div>
         </div>
-        <script src="{% static 'js/main.js' %}" type="module"> </script>
+    </div>
+<div class="container bot_body">
+        <div class="grid">
+            <!-- Create 6 rows for the guesses, each with 5 cells -->
+            <div class="row">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="row">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="row">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="row">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="row">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="row">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        </div>
+    </div>
+          <script src="{% static 'js/main.js' %}" type="module"> </script>
         <script src="{% static 'js/words.js' %}"type="module"></script>
         <script src="{% static 'js/wordle.js' %}"type="module"></script>
         <script src="{% static 'js/contents.js' %}"type="module"></script>
