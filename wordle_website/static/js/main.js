@@ -8,7 +8,7 @@ import { words } from './contents.js';
         return words[Math.floor(Math.random() * words.length)];
     }
     var word = getRandom();
-    
+
 
     const grid = document.querySelector('.grid');
     const keys = document.querySelectorAll('.key');
@@ -49,16 +49,21 @@ import { words } from './contents.js';
         // Handle enter key logic
         if (currentCell === 5) {
             let cells=[]
+            let cells_word = '';
             let isCorrect =true;
 
             for(let i =0; i<5; i++){
                 cells.push(getCell(currentRow,i));
+                cells_word +=getCell(currentRow,i).textContent;
             }
-             let letters_in_word = Array.from(word);
-
-
-
-
+            if (!words.includes(cells_word)) {
+                
+                fadeOut(document.querySelector('.warning'))
+                return;
+            };
+            
+            let letters_in_word = Array.from(word);
+            
             const result = cells.filter((word,index) => word.textContent ===letters_in_word[index]);
 
             cells.forEach((element,index) =>{
@@ -118,3 +123,15 @@ import { words } from './contents.js';
         return grid.children[row].children[4-cell];
     }
 // });
+
+function fadeOut(el) {
+    var opacity = 1; // Initial opacity
+    var interval = setInterval(function () {
+        if (opacity > 0) {
+            opacity -= 0.1;
+            el.style.opacity = opacity;
+        } else {
+            clearInterval(interval); // Stop the interval when opacity reaches 0
+        }
+    }, 150);
+}
