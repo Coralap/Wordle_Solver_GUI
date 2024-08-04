@@ -133,4 +133,4 @@ function bestWords(wordList, averageLetterPosition) {
 
 const averageLetterPosition = getMostCommonPosition();
 
-export { bestWords, averageLetterPosition };
+export { bestWords, averageLetterPosition, commonLetters };
