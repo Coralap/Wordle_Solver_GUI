@@ -1,7 +1,7 @@
 import { bestWords, averageLetterPosition } from './words.js';
 import { words } from './contents.js';
 
-
+var spam = false;
 
 // document.addEventListener('DOMContentLoaded', () => {
     function getRandom() {
@@ -33,17 +33,6 @@ import { words } from './contents.js';
             }
         });
     });
-
-    function getKeyFromEvent(e) {
-        if (e.key === 'Enter') {
-            return 'Enter';
-        } else if (e.key === 'Backspace') {
-            return 'Backspace';
-        } else {
-            return e.key; // For Hebrew letters
-        }
-    });
-});
 
 function getKeyFromEvent(e) {
     if (e.key === 'Enter') {
@@ -145,13 +134,16 @@ function handleKeyPress(key) {
 // });
 
 function fadeOut(el) {
+    if (spam) return;
     var opacity = 1; // Initial opacity
     var interval = setInterval(function () {
+        spam = true;
         if (opacity > 0) {
             opacity -= 0.1;
             el.style.opacity = opacity;
         } else {
             clearInterval(interval); // Stop the interval when opacity reaches 0
+            spam = false;
         }
     }, 150);
 }
