@@ -1,38 +1,43 @@
 import { bestWords, averageLetterPosition } from './words.js';
 import { words } from './contents.js';
+import { listMatches } from './wordle.js';
 
 var spam = false;
 
 // document.addEventListener('DOMContentLoaded', () => {
-    function getRandom() {
-        return words[Math.floor(Math.random() * words.length)];
-    }
-    var word = getRandom();
+function getRandom() {
+    return words[Math.floor(Math.random() * words.length)];
+}
+var word = getRandom();
 
 
-    const grid = document.querySelector('.grid');
-    const keys = document.querySelectorAll('.key');
-    let currentRow = 0;
-    let currentCell = 0;
-    console.log("kys")
+const grid = document.querySelector('.grid');
+const bot_grid = document.querySelector('.bot_body').querySelector('.grid');
+const keys = document.querySelectorAll('.key');
+const keyMap = {};
+let currentRow = 0;
+let currentCell = 0;
+// console.log("kys")
 
-    console.log(bestWords(words, averageLetterPosition));
+// console.log(bestWords(words, averageLetterPosition));
+keys.forEach(button => {
+    keyMap[button.getAttribute('data-key')] = button;
+});
+// Handle keypress events
+document.addEventListener('keydown', (e) => {
+    const key = getKeyFromEvent(e);
+    handleKeyPress(key);
+});
 
-    // Handle keypress events
-    document.addEventListener('keydown', (e) => {
-        const key = getKeyFromEvent(e);
-        handleKeyPress(key);
+// Handle button clicks
+keys.forEach(button => {
+    button.addEventListener('click', () => {
+        const key = button.getAttribute('data-key');
+        if (key) {
+            handleKeyPress(key);
+        }
     });
-
-    // Handle button clicks
-    keys.forEach(button => {
-        button.addEventListener('click', () => {
-            const key = button.getAttribute('data-key');
-            if (key) {
-                handleKeyPress(key);
-            }
-        });
-    });
+});
 
 function getKeyFromEvent(e) {
     if (e.key === 'Enter') {
@@ -46,12 +51,13 @@ function getKeyFromEvent(e) {
 
 function handleKeyPress(key) {
     if (key === 'Enter') {
+
         // Handle enter key logic
         if (currentCell === 5) {
             let cells=[]
             let cells_word = '';
             let isCorrect =true;
-
+            
             for(let i =0; i<5; i++){
                 cells.push(getCell(currentRow,i));
                 cells_word +=getCell(currentRow,i).textContent;
@@ -65,9 +71,9 @@ function handleKeyPress(key) {
             let letters_in_word = Array.from(word);
             
             const result = cells.filter((word,index) => word.textContent ===letters_in_word[index]);
-
+            
             cells.forEach((element,index) =>{
-            //if there are more letters in the actual word then the answer given no more yellow boys
+                //if there are more letters in the actual word then the answer given no more yellow boys
                 const num_letters_in_result = (result.filter(x => x.textContent===element.textContent)).length;
                 const num_letters_in_word = (letters_in_word.filter(x => x===element.textContent)).length;
                 const num_letters_in_cells= (cells.filter(x => x.textContent===element.textContent)).length;
@@ -81,21 +87,21 @@ function handleKeyPress(key) {
                     element.classList.remove("yellow_letter");
                     element.classList.add("wrong_letter");
                 }
-
+                
                 // Update button colors
                 const button = keyMap[element.textContent];
                 if (button) {
                     button.classList.add("wrong_letter");
                 }
             });
-
+            
             if (result.length !== 5) {
                 isCorrect = false;
             }
             result.forEach((element) => {
                 element.classList.add("correct");
                 element.classList.remove("wrong_letter");
-
+                
                 // Update button colors
                 const button = keyMap[element.textContent];
                 if (button) {
@@ -103,11 +109,28 @@ function handleKeyPress(key) {
                     button.classList.remove("wrong_letter");
                 }
             });
+            
 
+            // BOT
+            let correct_letters = [];
+            let correct_positions = [];
+            let wrong_letters = [];
+            cells.forEach((element, index) => {
+                if (element.classList.contains("correct")) {
+                    correct_letters.push([element.textContent, index]);
+                }
+                if (element.classList.contains("yellow_letter")) {
+                    correct_letters.push([element.textContent, index]);
+                }
+                if (element.classList.contains("wrong_letter")) {
+                    correct_letters.push(element.textContent);
+                }
+            });
+
+            console.log(listMatches(correct_letters, words, correct_positions, wrong_letters, currentRow));
             currentRow++;
             currentCell = 0;
 
-            console.log(cells)
         }
     } else if (key === 'Backspace') {
         // Handle backspace logic
@@ -128,9 +151,13 @@ function handleKeyPress(key) {
 }
 
 
-    function getCell(row, cell) {
-        return grid.children[row].children[4-cell];
-    }
+function getCell(row, cell) {
+    return grid.children[row].children[4-cell];
+}
+
+function getBotCell(row, cell) {
+    return bot_grid.children[row].children[4 - cell];
+}
 // });
 
 function fadeOut(el) {

@@ -1,7 +1,6 @@
 import { words } from './contents.js';
-import { bestWords, averageLetterPosition } from './words.js';
+import { commonLetters } from './words.js';
 
-let word = "";
 let i = 0;
 
 function getRandom() {
@@ -10,44 +9,42 @@ function getRandom() {
 
 function startGame() {
     i = 0;
-    word = getRandom();
+    // word = getRandom();
     // word="קלזיו"
     // console.log(word);
 }
 
-function gameLoop(wordGuess) {
-    while (i < 6) {
-        const wordTry = wordGuess;
-        if (wordTry.length !== 5 || !words.includes(wordTry)) {
-            console.log("please enter a real 5 letter word: ", wordTry);
-            continue;
+function gameLoop(wordGuess, correct_word) {
+    const wordTry = wordGuess;
+    // if (wordTry.length !== 5 || !words.includes(wordTry)) {
+    //     continue;
+    // }
+    const charList = [...wordTry];
+    const answer = [];
+    for (let n = 0; n < 5; n++) {
+        // if letter is correct make green
+        if ([...correct_word][n] === charList[n]) {
+            answer.push(1);
         }
-        const charList = [...wordTry];
-        const answer = [];
-        for (let n = 0; n < 5; n++) {
-            // if letter is correct make green
-            if ([...word][n] === charList[n]) {
-                answer.push(1);
-            }
-            // else if letter is in the word make yellow
-            else if (charList[n] in [...word]) {
-                answer.push(0);
-            }
-            // else make gray
-            else {
-                answer.push(-1);
-            }
+        // else if letter is in the word make yellow
+        else if (charList[n] in [...correct_word]) {
+            answer.push(0);
         }
-        // if all letters are correct
-        if (answer.every(val => val === 1)) {
-            // console.log("guessed result: ", wordGuess);
-            console.log("you won!");
-            return answer;
+        // else make gray
+        else {
+            answer.push(-1);
         }
-
-        i += 1;
+    }
+    // if all letters are correct
+    if (answer.every(val => val === 1)) {
+        // console.log("guessed result: ", wordGuess);
+        console.log("you won!");
         return answer;
     }
+
+    i += 1;
+    return answer;
+    
 }
 
 function match(word, greenLetters, yellowLetters, wrongLetters) {
@@ -92,13 +89,12 @@ function countAmountFromListToList(list1, list2) {
 function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, guessResults, turn) {
     console.log(guessResults);
     const common = (
-        correctLetters.some(([letter]) => words.commonLetters.includes(letter)) &&
-        countAmountFromListToList(words.commonLetters, correctLetters.map(([letter]) => letter)) >= 2
+        correctLetters.some(([letter]) => commonLetters.includes(letter)) &&
+        countAmountFromListToList(commonLetters, correctLetters.map(([letter]) => letter)) >= 2
     );
 
     if (
-        ((guessResults.filter(val => val === 1).length >= 3 && guessResults.filter(val => val === -1).length <= 2) && turn < 4) ||
-        (common && turn < 4 && yellowLetters.length === 0)
+        ((guessResults.filter(val => val === 1).length >= 3 && guessResults.filter(val => val === -1).length <= 2) && turn < 4) || (common && turn < 4 && yellowLetters.length === 0)
     ) {
         console.log("run");
 
@@ -191,3 +187,5 @@ function guesser() {
 //     }
 //     console.log(correct / 100);
 // }
+
+export { listMatches };
