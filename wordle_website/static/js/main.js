@@ -22,6 +22,8 @@ let currentCell = 0;
 let answers = [];
 let isCorrect = false;
 let botCorrect = false;
+let bot_answers = [];
+const watchResultsButton = document.getElementById('show-answers');
 // console.log("kys")
 
 // console.log(bestWords(words, averageLetterPosition));
@@ -134,14 +136,16 @@ function handleKeyPress(key) {
         for(let i =0; i<5; i++){
             bot_cells.push(getBotCell(currentRow,i));
         }
-
+        
         let bot_guess = listMatches(correct_letters, words, correct_positions, wrong_letters,answers, currentRow);
         answers = [];
-
+        
         bot_cells.forEach((element, index) => {
             element.textContent = Array.from(bot_guess)[index];
         });
-
+        
+        bot_answers.push(Array.from(bot_guess));
+        console.log(bot_answers);
 
         // console.log(bot_cells);
 
@@ -230,7 +234,7 @@ function handleKeyPress(key) {
                 } else {
                     winning.style.opacity = 1;
                     winning.style.backgroundColor = 'red';
-                    document.getElementById("kys").textContent = 'לוזר, הפסדת לבוט אפס שתכנתו קדלקמן: ביומיים ללא שימוש באף עזרים!';
+                    document.getElementById("kys").textContent = 'לוזר, הפסדת לבוט אפס שתכנתו כדלקמן: ביומיים ללא שימוש באף עזרים!';
                 }
             
         } else {
@@ -243,6 +247,26 @@ function handleKeyPress(key) {
         }
 
 
+}
+
+watchResultsButton.addEventListener('click', () => {
+    repopulateBotCells();
+    console.log(bot_answers);
+    winning.style.display = 'none';
+});
+
+function repopulateBotCells() {
+    const bot_cells = document.querySelector('.bot_body').querySelectorAll('.cell');
+    console.log(bot_cells);
+
+    bot_cells.forEach((cell, index) => {
+        const cell_index = index % 5;
+        const row_index = Math.floor(index / 5);  
+        console.log("cell_index " + cell_index + " " + "row_index " + row_index);
+        if (bot_answers.reverse()[row_index][cell_index] === undefined) return;
+        console.log(bot_answers.reverse()[row_index][cell_index]);
+        cell.textContent = bot_answers.reverse()[row_index][cell_index];
+    });
 }
 
 
