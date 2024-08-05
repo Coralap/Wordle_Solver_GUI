@@ -41,7 +41,7 @@ function gameLoop(wordGuess, correct_word) {
     // if all letters are correct
     if (answer.every(val => val === 1)) {
         // console.log("guessed result: ", wordGuess);
-        console.log("you won!");
+        // console.log("you won!");
         return answer;
     }
 
@@ -100,7 +100,7 @@ function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, gues
     if (
         ((guessResults.filter(val => val === 1).length >= 3 && guessResults.filter(val => val === -1).length <= 2) && turn < 4) || (common && turn < 4 && yellowLetters.length === 0)
     ) {
-        console.log("run");
+        // console.log("run");
 
         let lettersToAvoid = [];
 
@@ -113,7 +113,7 @@ function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, gues
         const [newBestWords, bestScore] = bestWords(newMatch, averageLetterPosition);
         console.log(newBestWords);
         if (newBestWords.length > 0) {
-            console.log("new word time!");
+            // console.log("new word time!");
             return newBestWords[0];
         }
     }
@@ -145,7 +145,7 @@ function guesser() {
         // }
 
         if (i === 5) {
-            console.log("guessed word: ", wordGuess);
+            // console.log("guessed word: ", wordGuess);
             console.log(guessResults);
         }
 
@@ -179,7 +179,7 @@ function guesser() {
         }
     }
 
-    console.log("you lost");
+    // console.log("you lost");
     return false;
 }
 
