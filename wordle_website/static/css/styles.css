@@ -72,24 +72,21 @@ body {
 
 .cell.wrong_letter{
     background-color: gray;
-    color: white; /*
+    color: white;
 }
 
 .keyboard {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: relative;
 }
+
 
 .keyboard-row {
     display: flex;
     gap: 10px;
-    justify-content: center; /* Center the keyboard rows */
-}
 
-.keyboard-row {
-    display: flex;
-    gap: 10px;
     justify-content: center; /* Center the keyboard rows */
 }
 
@@ -106,6 +103,7 @@ body {
 
     max-width: 50px;
     text-align: center; /* Center text within the button */
+
 }
 
 .key.special {
@@ -140,7 +138,7 @@ body {
     padding-left: 100%;
     position: absolute;
     text-align: center;
-    z-index: 11;
+    z-index: 10;
     margin-inline: auto;
     font-size: 50px;
     margin: 100%;
