@@ -1,5 +1,8 @@
 import { words } from './contents.js';
 import { commonLetters } from './words.js';
+import {averageLetterPosition} from './words.js';
+import {bestWords} from './words.js';
+
 
 let i = 0;
 
@@ -49,9 +52,9 @@ function gameLoop(wordGuess, correct_word) {
 
 function match(word, greenLetters, yellowLetters, wrongLetters) {
     // if the pattern is longer than the word, it can't be a match
-    if (greenLetters.length > word.length) {
-        throw new Error(`pattern is longer than word: ${greenLetters} ${word}`);
-    }
+//    if (greenLetters.length > word.length) {
+//        throw new Error(`pattern is longer than word: ${greenLetters} ${word}`);
+//    }
 
     // green letters must appear in the word in the correct place
     if (!greenLetters.every(([c, pos]) => word[pos] === c)) {
@@ -87,6 +90,7 @@ function countAmountFromListToList(list1, list2) {
 }
 
 function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, guessResults, turn) {
+
     console.log(guessResults);
     const common = (
         correctLetters.some(([letter]) => commonLetters.includes(letter)) &&
@@ -106,7 +110,7 @@ function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, gues
 
         const newMatch = allWords.filter(word => getWordWithoutUsedWords(word, lettersToAvoid));
         console.log(lettersToAvoid);
-        const [newBestWords, bestScore] = words.bestWords(newMatch, words.averageLetterPosition);
+        const [newBestWords, bestScore] = bestWords(newMatch, averageLetterPosition);
         console.log(newBestWords);
         if (newBestWords.length > 0) {
             console.log("new word time!");
@@ -115,8 +119,10 @@ function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, gues
     }
 
     const matches = allWords.filter(word => match(word, correctLetters, yellowLetters, wrongLetters));
-    const [bestWords, bestScore] = words.bestWords(matches, words.averageLetterPosition);
-    return bestWords[0];
+    console.log(matches)
+    console.log(bestWords(matches, averageLetterPosition));
+    const [_bestWords, bestScore] = bestWords(matches, averageLetterPosition);
+    return _bestWords[0];
 }
 
 function guesser() {
