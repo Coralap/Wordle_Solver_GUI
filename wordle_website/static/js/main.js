@@ -94,7 +94,13 @@ function handleKeyPress(key) {
                 // Update button colors
                 const button = keyMap[element.textContent];
                 if (button) {
-                    button.classList.add("wrong_letter");
+                    if(element.classList.contains("yellow_letter")){
+                    button.classList.add("yellow_letter");
+
+                    }else{
+               button.classList.add("wrong_letter");
+                    }
+
                 }
             });
             
@@ -110,6 +116,8 @@ function handleKeyPress(key) {
                 if (button) {
                     button.classList.add("correct");
                     button.classList.remove("wrong_letter");
+                     button.classList.remove("yellow_letter");
+
                 }
             });
             
