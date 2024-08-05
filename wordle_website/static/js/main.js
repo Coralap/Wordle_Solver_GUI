@@ -14,6 +14,7 @@ var word = getRandom();
 const grid = document.querySelector('.grid');
 const bot_grid = document.querySelector('.bot_body').querySelector('.grid');
 const winning = document.querySelector('.success');
+winning.style.zIndex ="-1"
 const keys = document.querySelectorAll('.key');
 const keyMap = {};
 const audio = new Audio('static/data/audio/ding-101492.mp3');
@@ -227,7 +228,9 @@ function handleKeyPress(key) {
     }
 
     if (botCorrect || isCorrect) {
+        winning.style.zIndex ="10"
                 if (isCorrect) {
+
                     winning.style.opacity = 1;
                     winning.style.backgroundColor = 'green';
                     audio.play();
