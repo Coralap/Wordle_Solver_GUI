@@ -19,6 +19,23 @@ body {
     right:10%;
     margin-bottom:184px;
 }
+
+.end_button{
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.end_button:hover {
+  background-color: #444;
+}
+
+
 .key.wrong_letter {
     background-color: #d9534f; /* Red for wrong letters */
 }
