@@ -91,7 +91,7 @@ function countAmountFromListToList(list1, list2) {
 
 function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, guessResults, turn) {
 
-    console.log(guessResults);
+    // console.log(guessResults);
     const common = (
         correctLetters.some(([letter]) => commonLetters.includes(letter)) &&
         countAmountFromListToList(commonLetters, correctLetters.map(([letter]) => letter)) >= 2
@@ -109,9 +109,9 @@ function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, gues
         lettersToAvoid = [...new Set([...lettersToAvoid, ...wrongLetters])];
 
         const newMatch = allWords.filter(word => getWordWithoutUsedWords(word, lettersToAvoid));
-        console.log(lettersToAvoid);
+        // console.log(lettersToAvoid);
         const [newBestWords, bestScore] = bestWords(newMatch, averageLetterPosition);
-        console.log(newBestWords);
+        // console.log(newBestWords);
         if (newBestWords.length > 0) {
             // console.log("new word time!");
             return newBestWords[0];
@@ -119,8 +119,8 @@ function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, gues
     }
 
     const matches = allWords.filter(word => match(word, correctLetters, yellowLetters, wrongLetters));
-    console.log(matches)
-    console.log(bestWords(matches, averageLetterPosition));
+    // console.log(matches)
+    // console.log(bestWords(matches, averageLetterPosition));
     const [_bestWords, bestScore] = bestWords(matches, averageLetterPosition);
     return _bestWords[0];
 }
@@ -135,7 +135,7 @@ function guesser() {
     for (let i = 0; i < 6; i++) {
         greenLetters = [...new Set(greenLetters)];
         // console.log("guessed word: ", wordGuess);
-        console.log(wordGuess);
+        // console.log(wordGuess);
         const guessResults = gameLoop(wordGuess);
 
         // const guessResults = [];
@@ -146,7 +146,7 @@ function guesser() {
 
         if (i === 5) {
             // console.log("guessed word: ", wordGuess);
-            console.log(guessResults);
+            // console.log(guessResults);
         }
 
         const dictionary = words;
