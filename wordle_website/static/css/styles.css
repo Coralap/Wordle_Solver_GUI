@@ -131,3 +131,21 @@ body {
     font-size: larger;
     opacity: 0;
 }
+
+.success {
+    background-color: rgba(0, 255, 0, 0.89);
+    padding-top: 100%;
+    padding-bottom: 100%;
+    padding-right: 100%;
+    padding-left: 100%;
+    position: absolute;
+    text-align: center;
+    z-index: 11;
+    margin-inline: auto;
+    font-size: 50px;
+    margin: 100%;
+
+    text-wrap: nowrap;
+
+    opacity: 0;
+}

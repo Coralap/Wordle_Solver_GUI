@@ -13,11 +13,13 @@ var word = getRandom();
 
 const grid = document.querySelector('.grid');
 const bot_grid = document.querySelector('.bot_body').querySelector('.grid');
+const winning = document.querySelector('.success');
 const keys = document.querySelectorAll('.key');
 const keyMap = {};
+const audio = new Audio('static/data/audio/ding-101492.mp3');
 let currentRow = 0;
 let currentCell = 0;
-     let answers = [];
+let answers = [];
 // console.log("kys")
 
 // console.log(bestWords(words, averageLetterPosition));
@@ -53,13 +55,15 @@ function getKeyFromEvent(e) {
             let correct_positions = [];
             let wrong_letters = [];
 function handleKeyPress(key) {
+
+    let isCorrect = false;
+    let botCorrect = false;
     if (key === 'Enter') {
 
         // Handle enter key logic
         if (currentCell === 5) {
             let cells=[]
             let cells_word = '';
-            let isCorrect =true;
             
             for(let i =0; i<5; i++){
                 cells.push(getCell(currentRow,i));
@@ -104,8 +108,8 @@ function handleKeyPress(key) {
                 }
             });
             
-            if (result.length !== 5) {
-                isCorrect = false;
+            if (result.length === 5) {
+                isCorrect = true;
             }
             result.forEach((element) => {
                 element.classList.add("correct");
@@ -124,47 +128,50 @@ function handleKeyPress(key) {
 
             // BOT
        const bot_cells = []
-            for(let i =0; i<5; i++){
-                bot_cells.push(getBotCell(currentRow,i));
+        for(let i =0; i<5; i++){
+            bot_cells.push(getBotCell(currentRow,i));
+        }
+
+        let bot_guess = listMatches(correct_letters, words, correct_positions, wrong_letters,answers, currentRow);
+        answers = [];
+
+        bot_cells.forEach((element, index) => {
+            element.textContent = Array.from(bot_guess)[index];
+        });
+
+
+        console.log(bot_cells);
+
+        console.log(answers);
+        //bot section
+
+
+        const bot_result = bot_cells.filter((word,index) => word.textContent ===letters_in_word[index]);
+
+        if (bot_result.length === 5) {
+            botCorrect = true;
+        }
+
+
+        bot_cells.forEach((element,index) =>{
+            //if there are more letters in the actual word then the answer given no more yellow boys
+            const bott_num_letters_in_result = (bot_result.filter(x => x.textContent===element.textContent)).length;
+            const bot_num_letters_in_word = (letters_in_word.filter(x => x===element.textContent)).length;
+            const bot_num_letters_in_cells= (bot_cells.filter(x => x.textContent===element.textContent)).length;
+
+            const is_yellow = (bot_num_letters_in_word>=bot_num_letters_in_cells);
+
+            if(letters_in_word.includes(element.textContent)){
+                element.classList.add("yellow_letter");
+            } else if (element.textContent !== letters_in_word[index]) {
+                element.classList.add("wrong_letter");
             }
+            if (bot_num_letters_in_word === bott_num_letters_in_result) {
+                element.classList.remove("yellow_letter");
+                element.classList.add("wrong_letter");
+            }
+        });
 
-            let bot_guess = listMatches(correct_letters, words, correct_positions, wrong_letters,answers, currentRow);
-
-            answers = [];
-
-            bot_cells.forEach((element, index) => {
-                element.textContent = Array.from(bot_guess)[index];
-            });
-
-
-            console.log(bot_cells);
-
-            console.log(answers);
-            //bot section
-
-
-            const bot_result = bot_cells.filter((word,index) => word.textContent ===letters_in_word[index]);
-
-
-
-            bot_cells.forEach((element,index) =>{
-                //if there are more letters in the actual word then the answer given no more yellow boys
-                const bott_num_letters_in_result = (bot_result.filter(x => x.textContent===element.textContent)).length;
-                const bot_num_letters_in_word = (letters_in_word.filter(x => x===element.textContent)).length;
-                const bot_num_letters_in_cells= (bot_cells.filter(x => x.textContent===element.textContent)).length;
-
-                const is_yellow = (bot_num_letters_in_word>=bot_num_letters_in_cells);
-
-                if(letters_in_word.includes(element.textContent)){
-                    element.classList.add("yellow_letter");
-                } else if (element.textContent !== letters_in_word[index]) {
-                    element.classList.add("wrong_letter");
-                }
-                if (bot_num_letters_in_word === bott_num_letters_in_result) {
-                    element.classList.remove("yellow_letter");
-                    element.classList.add("wrong_letter");
-                }
-            });
             bot_result.forEach((element) => {
                 element.classList.add("correct");
                 element.classList.remove("wrong_letter");
@@ -209,6 +216,18 @@ function handleKeyPress(key) {
             cell.textContent = key;
             cell.style.direction = 'rtl'; // Ensure text is right-to-left
             currentCell++;
+        }
+    }
+
+    if (botCorrect || isCorrect) {
+        if (isCorrect) {
+            winning.style.opacity = 1;
+            winning.style.backgroundColor = 'green';
+            audio.play();
+        } else {
+            winning.style.opacity = 1;
+            winning.style.backgroundColor = 'red';
+            document.getElementById("kys").textContent = 'לוזר, הפסדת לבוט אפס שתכנתו קדלקמן: ביומיים ללא שימוש באף עזרים!';
         }
     }
 }
