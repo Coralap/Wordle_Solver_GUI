@@ -122,6 +122,9 @@ function listMatches(correctLetters, allWords, yellowLetters, wrongLetters, gues
     // console.log(matches)
     // console.log(bestWords(matches, averageLetterPosition));
     const [_bestWords, bestScore] = bestWords(matches, averageLetterPosition);
+    if (turn == 0){
+        return _bestWords[Math.floor(Math.random() * _bestWords.length)];
+    }
     return _bestWords[0];
 }
 
@@ -130,7 +133,6 @@ function guesser() {
     let yellowLetters = [];
     let wrongLetters = [];
     let greenLetters = [];
-    let wordGuess = "ליורה";
 
     for (let i = 0; i < 6; i++) {
         greenLetters = [...new Set(greenLetters)];

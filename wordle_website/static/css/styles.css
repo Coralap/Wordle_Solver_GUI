@@ -17,7 +17,7 @@ body {
 .bot_body{
        position: fixed;
     right:10%;
-    margin-bottom:152px;
+    margin-bottom:184px;
 }
 .key.wrong_letter {
     background-color: #d9534f; /* Red for wrong letters */
@@ -72,7 +72,9 @@ body {
 
 .cell.wrong_letter{
     background-color: gray;
-    color: white;
+
+    color: white; 
+
 }
 
 .keyboard {

@@ -265,9 +265,9 @@ function repopulateBotCells() {
     bot_cells.forEach((cell, index) => {
         const cell_index = index % 5;
         const row_index = Math.floor(index / 5);  
-        console.log("cell_index " + cell_index + " " + "row_index " + row_index);
+        // console.log("cell_index " + cell_index + " " + "row_index " + row_index);
         if (bot_answers[row_index] === undefined) return;
-        console.log(bot_answers[row_index][Math.abs(4 - cell_index)]);
+        // console.log(bot_answers[row_index][Math.abs(4 - cell_index)]);
         cell.textContent = bot_answers[row_index][Math.abs(4-cell_index)];
     });
 }
