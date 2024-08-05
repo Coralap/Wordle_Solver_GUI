@@ -20,6 +20,8 @@ const audio = new Audio('static/data/audio/ding-101492.mp3');
 let currentRow = 0;
 let currentCell = 0;
 let answers = [];
+let isCorrect = false;
+let botCorrect = false;
 // console.log("kys")
 
 // console.log(bestWords(words, averageLetterPosition));
@@ -56,8 +58,9 @@ function getKeyFromEvent(e) {
             let wrong_letters = [];
 function handleKeyPress(key) {
 
-    let isCorrect = false;
-    let botCorrect = false;
+    if (botCorrect || isCorrect) return;
+
+
     if (key === 'Enter') {
 
         // Handle enter key logic
@@ -140,9 +143,9 @@ function handleKeyPress(key) {
         });
 
 
-        console.log(bot_cells);
+        // console.log(bot_cells);
 
-        console.log(answers);
+        // console.log(answers);
         //bot section
 
 
@@ -220,16 +223,26 @@ function handleKeyPress(key) {
     }
 
     if (botCorrect || isCorrect) {
-        if (isCorrect) {
-            winning.style.opacity = 1;
-            winning.style.backgroundColor = 'green';
-            audio.play();
+                if (isCorrect) {
+                    winning.style.opacity = 1;
+                    winning.style.backgroundColor = 'green';
+                    audio.play();
+                } else {
+                    winning.style.opacity = 1;
+                    winning.style.backgroundColor = 'red';
+                    document.getElementById("kys").textContent = 'לוזר, הפסדת לבוט אפס שתכנתו קדלקמן: ביומיים ללא שימוש באף עזרים!';
+                }
+            
         } else {
-            winning.style.opacity = 1;
-            winning.style.backgroundColor = 'red';
-            document.getElementById("kys").textContent = 'לוזר, הפסדת לבוט אפס שתכנתו קדלקמן: ביומיים ללא שימוש באף עזרים!';
+            if (currentRow > 5) {
+
+                winning.style.opacity = 1;
+                winning.style.backgroundColor = 'purple';
+                document.getElementById("kys").textContent = ' שניכם לוזרים גרועים שאינם יכולים לפתור אף וורדעל פשוט אחד! '
+            }
         }
-    }
+
+
 }
 
 
