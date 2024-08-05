@@ -121,6 +121,7 @@ function handleKeyPress(key) {
             }
 
             let bot_guess = listMatches(correct_letters, words, correct_positions, wrong_letters,answers, currentRow);
+
             answers = [];
 
             bot_cells.forEach((element, index) => {
@@ -135,6 +136,7 @@ function handleKeyPress(key) {
 
 
             const bot_result = bot_cells.filter((word,index) => word.textContent ===letters_in_word[index]);
+
 
 
             bot_cells.forEach((element,index) =>{
@@ -175,6 +177,7 @@ function handleKeyPress(key) {
                     wrong_letters.push(element.textContent);
                     answers.push(-1);
                 }
+                element.textContent="";
             });
 
 
